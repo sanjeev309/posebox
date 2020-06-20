@@ -7,6 +7,7 @@ import config
 class Vid2Frames:
 
     def __init__(self, in_path, out_path):
+        self.file_index = 0
 
         for _, __, files in os.walk(in_path):
             for file in files:
@@ -28,7 +29,6 @@ class Vid2Frames:
     def save_frames(self, video, out_path, visual=False):
 
         base_filename = "image_"
-        file_index = 0
 
         while video.isOpened():
 
@@ -39,12 +39,12 @@ class Vid2Frames:
                     if cv2.waitKey(1) & 0xFF == ord('q'):
                         break
 
-                filename = base_filename + str(file_index) + ".jpg"
+                filename = base_filename + str(self.file_index) + ".jpg"
                 cv2.imwrite(os.path.join(out_path, filename), frame)
 
-                file_index += 1
+                self.file_index += 1
 
-        print("[INFO] Saved images", file_index)
+        print("[INFO] Saved images", self.file_index)
         self.video.release()
 
 
