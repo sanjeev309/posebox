@@ -17,7 +17,7 @@ class Vid2Frames:
                 self.save_frames(self.video, out_path, visual)
 
     # def __del__(self):
-    #     del self.video
+    #     del self.videos
     #     cv2.destroyAllWindows()
 
     def load_video(self, path):
@@ -34,7 +34,7 @@ class Vid2Frames:
 
             ret, frame = video.read()
             if frame is not None:
-                if frame_count % 5 == 0:
+                if frame_count % config.SAVE_EVERY == 0:
                     if visual:
                         cv2.imshow('frame', frame)
                         if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -48,7 +48,7 @@ class Vid2Frames:
             else:
                 break
 
-        print("[INFO] Saved images", self.file_index)
+        print("[INFO] Total Saved images", self.file_index)
         self.video.release()
 
 

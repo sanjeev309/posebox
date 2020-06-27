@@ -7,6 +7,9 @@ INPUT_VIDEO_PATH = "videos"
 OUTPUT_FRAMES_PATH = "frames"
 VISUAL = False
 
+# Frame interval for frame save
+SAVE_EVERY = 5
+
 
 '''
 Config validation
