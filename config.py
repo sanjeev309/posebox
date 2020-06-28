@@ -5,6 +5,9 @@ This python script holds configuration for all variables to be used in this proj
 # Vid 2 Frames
 INPUT_VIDEO_PATH = "videos"
 OUTPUT_FRAMES_PATH = "frames"
+RESIZED_OUTPUT_FRAMES_PATH = "resized_frames"
+RESIZE_DIMEN = 512
+
 VISUAL = False
 
 # Frame interval for frame save
@@ -26,6 +29,12 @@ if not os.path.exists(OUTPUT_FRAMES_PATH):
     print("Output folder not found: ", OUTPUT_FRAMES_PATH)
     print("Creating folder")
     os.makedirs(OUTPUT_FRAMES_PATH)
+
+if not os.path.exists(RESIZED_OUTPUT_FRAMES_PATH):
+    print("Resized Output folder not found: ", RESIZED_OUTPUT_FRAMES_PATH)
+    print("Creating folder")
+    os.makedirs(RESIZED_OUTPUT_FRAMES_PATH)
+
 
 print("Data visualisation enabled : ", VISUAL)
 print("-------------------------------------")

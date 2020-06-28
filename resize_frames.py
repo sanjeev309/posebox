@@ -1,11 +1,13 @@
 import os
+import config
 from PIL import Image
 
 
-images_dir = "frames"
-target_path = "resized_frames"
-resize_width = 512
-resize_height = 512
+images_dir = config.OUTPUT_FRAMES_PATH
+target_path = config.RESIZED_OUTPUT_FRAMES_PATH
+
+resize_width = resize_height = config.RESIZE_DIMEN
+
 for root, folders, files in os.walk(images_dir):
     for file in files:
         img = str(os.path.join(images_dir, file))
@@ -13,3 +15,5 @@ for root, folders, files in os.walk(images_dir):
         size = (resize_width, resize_height)
         im_resized = im.resize(size, Image.ANTIALIAS)
         im_resized.save(target_path + "/" + str(file))
+
+    print("Resized Images", len(files))
