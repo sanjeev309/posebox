@@ -14,6 +14,9 @@ VISUAL = False
 SAVE_EVERY = 5
 
 
+ANNOTATION_FILE = "annotation.csv"
+
+
 '''
 Config validation
 '''
