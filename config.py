@@ -16,6 +16,8 @@ SAVE_EVERY = 5
 
 ANNOTATION_FILE = "annotation.csv"
 
+FORMATTED_ANNOTATION_FILE = "annotation_formatted.csv"
+HEADER_ANNOTATION_FILE = ['file_name', 'coordinates']
 
 '''
 Config validation
