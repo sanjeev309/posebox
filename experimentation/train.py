@@ -4,7 +4,6 @@ import numpy as np
 from tensorflow import keras
 from tensorflow.keras import layers
 
-
 num_output = 8
 input_shape = (512, 512, 3)
 
@@ -18,10 +17,9 @@ checkpoint_dir = OUTPUT + "/ckpt"
 if not os.path.exists(checkpoint_dir):
     os.makedirs(checkpoint_dir)
 
-
 ### Load data and target
-data = np.load(os.path.join(OUTPUT,'data.npy'))
-target = np.load(os.path.join(OUTPUT,'target.npy'))
+data = np.load(os.path.join(OUTPUT, 'data.npy'))
+target = np.load(os.path.join(OUTPUT, 'target.npy'))
 num_samples = data.shape[0]
 print("num_samples", num_samples)
 
@@ -41,7 +39,7 @@ print(y_test.shape)
 
 
 def build_model():
-    base_model = keras.applications.MobileNetV2(input_shape=input_shape,
+    base_model = keras.applications.MobileNetV2(input_shape=(127, 127, 3),
                                                 include_top=False,
                                                 weights='imagenet')
 
@@ -51,16 +49,22 @@ def build_model():
 
     model = keras.Sequential([
 
+        layers.Input(shape=input_shape),
+        layers.Conv2D(3, (2, 2), activation='relu'),
+        layers.MaxPool2D((2, 2)),
+        layers.Conv2D(3, (2, 2), activation='relu'),
+        layers.MaxPool2D((2, 2)),
         base_model,
         layers.Flatten(),
         layers.Dense(64),
+        layers.Dense(32),
         layers.Dense(16),
         layers.Dense(num_output, activation="sigmoid"),
 
     ])
-    optimizer = keras.optimizers.RMSprop(0.01)
+    optimizer = keras.optimizers.SGD(0.01)
 
-    model.compile(loss=keras.losses.mean_absolute_error,
+    model.compile(loss=keras.losses.mean_squared_error,
                   optimizer=optimizer,
                   metrics=['accuracy'])
     return model
@@ -96,5 +100,6 @@ callbacks = [
         period=5)
 ]
 
-print(initial_epoch)
-model.fit(data, target, verbose=1, epochs=50, batch_size=batch_size, initial_epoch = initial_epoch, validation_split= 0.2, callbacks=callbacks)
+print("Initial Epoch: ", initial_epoch)
+model.fit(data, target, verbose=1, epochs=5000, batch_size=batch_size, initial_epoch=initial_epoch,
+          validation_split=0.2, callbacks=callbacks)
