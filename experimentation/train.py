@@ -73,20 +73,28 @@ def make_or_restore_model():
                    for name in os.listdir(checkpoint_dir)]
     if checkpoints:
         latest_checkpoint = max(checkpoints, key=os.path.getctime)
+        name = os.path.basename(latest_checkpoint)
+        first, last = "weights.", "-"
+        start = name.index(first) + len(first)
+        end = name.index(last, start)
+        initial_epoch = int(name[start:end])
+        print(initial_epoch)
         print('Restoring from', latest_checkpoint)
-        return keras.models.load_model(latest_checkpoint)
+        return initial_epoch, keras.models.load_model(latest_checkpoint)
     print('Creating a new model')
-    return build_model()
+    initial_epoch = 0
+    return initial_epoch, build_model()
 
 
-model = make_or_restore_model()
+initial_epoch, model = make_or_restore_model()
 callbacks = [
     # This callback saves a SavedModel every 5 epochs.
     # We include the training loss in the folder name.
     keras.callbacks.ModelCheckpoint(
-        filepath=checkpoint_dir + '/ckpt-loss={loss:.2f}',
+        filepath=checkpoint_dir + '/weights.{epoch:1d}-{val_loss:.2f}.hdf5',
         # save_freq=4)
         period=5)
 ]
 
-model.fit(data, target, verbose=1, epochs=50, batch_size=batch_size, validation_split= 0.2, callbacks=callbacks)
+print(initial_epoch)
+model.fit(data, target, verbose=1, epochs=50, batch_size=batch_size, initial_epoch = initial_epoch, validation_split= 0.2, callbacks=callbacks)
