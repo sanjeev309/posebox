@@ -95,7 +95,7 @@ callbacks = [
     # This callback saves a SavedModel every 5 epochs.
     # We include the training loss in the folder name.
     keras.callbacks.ModelCheckpoint(
-        filepath=checkpoint_dir + '/weights.{epoch:1d}-{val_loss:.2f}.hdf5',
+        filepath=checkpoint_dir + '/weights.{epoch:1d}-{val_loss:.4f}.hdf5',
         # save_freq=4)
         period=5)
 ]
