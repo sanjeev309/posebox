@@ -9,7 +9,7 @@ import config
 
 visualize_smoke_test = True
 
-ckpt_path = config.OUTPUT + "/ckpt" + "/weights.2000-0.0139.hdf5"
+ckpt_path = config.OUTPUT + "/ckpt" + "/weights.3400-0.0185.hdf5"
 
 data = np.empty((0,512,512,3), dtype=np.int8)
 files_store = np.empty((0,1), dtype=np.str)
@@ -72,5 +72,11 @@ if visualize_smoke_test:
             cv2.circle(image, (int(float(res[2])), int(float(res[3]))), 2, [0, 0, 255], -1)
             cv2.circle(image, (int(float(res[4])), int(float(res[5]))), 2, [0, 0, 255], -1)
             cv2.circle(image, (int(float(res[6])), int(float(res[7]))), 2, [0, 0, 255], -1)
+
+            cv2.putText(image, "1", (int(float(res[0])), int(float(res[1]))), cv2.FONT_HERSHEY_SIMPLEX,1, [0,0,255],1)
+            cv2.putText(image, "2", (int(float(res[2])), int(float(res[3]))), cv2.FONT_HERSHEY_SIMPLEX,1, [0,0,255],1)
+            cv2.putText(image, "3", (int(float(res[4])), int(float(res[5]))), cv2.FONT_HERSHEY_SIMPLEX,1, [0,0,255],1)
+            cv2.putText(image, "4", (int(float(res[6])), int(float(res[7]))), cv2.FONT_HERSHEY_SIMPLEX,1, [0,0,255],1)
+
 
             cv2.imwrite(config.TEST_OUTPUT + "/" + "eval_" + str(image_name), image)
