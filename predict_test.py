@@ -34,9 +34,6 @@ for root, folders, files in os.walk(config.TEST_OUTPUT):
         heights = np.append(heights, height)
 
 num_samples = data.shape[0]
-arr = np.arange(num_samples)
-np.random.shuffle(arr)
-data = data[arr]
 
 #loading the model
 model = keras.models.load_model(ckpt_path)
