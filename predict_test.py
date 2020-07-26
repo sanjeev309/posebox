@@ -6,16 +6,10 @@ import cv2
 import csv
 import config
 
-OUTPUT = '/home/harshini/backup_to_drive/workspace/harshini/posebox/output'
-
-smoke_testing = "/home/harshini/backup_to_drive/workspace/harshini/posebox/smoke_testing"
 
 visualize_smoke_test = True
 
-smoke_testing_results = "/home/harshini/backup_to_drive/workspace/harshini/posebox/smoke_testing_visualize"
-
-ckpt_path = OUTPUT + "/ckpt" + "/weights.476-0.0456.hdf5"
-
+ckpt_path = config.OUTPUT + "/ckpt" + "/weights.2000-0.0139.hdf5"
 
 data = np.empty((0,512,512,3), dtype=np.int8)
 files_store = np.empty((0,1), dtype=np.str)
@@ -23,9 +17,9 @@ widths = np.empty((0,1), dtype=np.int)
 heights = np.empty((0,1), dtype=np.int)
 
 #normalizing the images bofe sending todel
-for root, folders, files in os.walk(smoke_testing):
+for root, folders, files in os.walk(config.TEST_OUTPUT):
   for file in files:
-    image_path = os.path.join(smoke_testing, file)
+    image_path = os.path.join(config.TEST_OUTPUT, file)
     print(image_path)
     image = cv2.imread(image_path)
     width = image.shape[0]
@@ -54,23 +48,23 @@ res = res.tolist()
 
 #storing the output from model into csv
 rows = zip(files_store, res, widths, heights)
-with open(OUTPUT + '/smoke_testing_results.csv', "w") as f:
+with open(config.OUTPUT + '/smoke_testing_results.csv', "w") as f:
     writer = csv.writer(f)
     for row in rows:
         writer.writerow(row)
 
 #drawing the coordinates on the image for visualization
 if visualize_smoke_test:
-    if not os.path.exists(smoke_testing_results):
-        os.makedirs(smoke_testing_results)
+    if not os.path.exists(config.TEST_OUTPUT):
+        os.makedirs(config.TEST_OUTPUT)
 
-    with open(OUTPUT + '/smoke_testing_results.csv') as csv_file:
+    with open(config.OUTPUT + '/smoke_testing_results.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
             # print(row)
             image_name = row[0]
-            image_path = os.path.join(smoke_testing,image_name)
+            image_path = os.path.join(config.TEST_OUTPUT, image_name)
             image = cv2.imread(image_path)
             res = row[1].strip('][').split(', ')
             res = list(res)
@@ -79,4 +73,4 @@ if visualize_smoke_test:
             cv2.circle(image, (int(float(res[4])), int(float(res[5]))), 2, [0, 0, 255], -1)
             cv2.circle(image, (int(float(res[6])), int(float(res[7]))), 2, [0, 0, 255], -1)
 
-            cv2.imwrite(smoke_testing_results + "/" + str(image_name), image)
+            cv2.imwrite(config.TEST_OUTPUT + "/" + "eval_" + str(image_name), image)
