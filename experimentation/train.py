@@ -1,5 +1,7 @@
 import os
 
+import config
+
 import numpy as np
 from tensorflow import keras
 from tensorflow.keras import layers
@@ -11,9 +13,9 @@ input_shape = (512, 512, 3)
 
 batch_size = 10
 
-IMAGES_FOLDER = 'resized_frames'
-ANNOTATION_FILE = 'annotation_formatted.csv'
-OUTPUT = 'output'
+IMAGES_FOLDER = config.RESIZED_OUTPUT_FRAMES_PATH
+ANNOTATION_FILE = config.FORMATTED_ANNOTATION_FILE
+OUTPUT = config.OUTPUT
 
 checkpoint_dir = OUTPUT + "/ckpt"
 if not os.path.exists(checkpoint_dir):
