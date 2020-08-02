@@ -85,6 +85,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ## Authors
 
 [Sanjeev Tripathi](https://www.linkedin.com/in/sanjeev309/)
+
 [Harshini Gudipally](https://www.linkedin.com/in/harshini-gudipally/)
 
 
