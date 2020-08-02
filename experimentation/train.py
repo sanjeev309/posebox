@@ -1,6 +1,6 @@
 import os
 
-import config
+from posebox import config
 
 import numpy as np
 from tensorflow import keras
@@ -100,8 +100,8 @@ callbacks = [
     # We include the training loss in the folder name.
     keras.callbacks.ModelCheckpoint(
         filepath=checkpoint_dir + '/weights.{epoch:1d}-{val_loss:.4f}.hdf5',
-        # save_freq=4)
-        period=5)
+        # save_freq=4)#for batchs
+        period=5)#for epochs
 ]
 
 print("Initial Epoch: ", initial_epoch)
