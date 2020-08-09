@@ -3,7 +3,7 @@
 A machine learning approach for pose estimation of hand-drawn marker
 
 ## Details
-Pose estimation is a costly operation and often requires additional harware like depth sensor for accuracy for plane detection.
+Pose estimation is a costly operation and often requires additional hardware like depth sensor for accurate plane detection.
 This project is an attempt to build a computationally cheap, no additional hardware dependency and realtime
 pose estimation of a fixed hand-drawn marker. 
 
@@ -91,4 +91,4 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## License
 
-This project is licensed under the GNU GPL V3 - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
