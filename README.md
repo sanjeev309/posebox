@@ -14,6 +14,13 @@ pose estimation of a fixed hand-drawn marker.
 
 Checkout [requirements.txt](requirements.txt) for specifics
 
+The project is structured per the following layout. 
+
+![](assets/folder_strucure.png)
+
+This means you will have to create __data__ and it's sub folders accordingly  
+
+
 ## Data
 The training data contains a specific marker hand drawn on paper and annotated always in a particular order.
 
