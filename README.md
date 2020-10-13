@@ -29,6 +29,9 @@ The data flow pipeline is as follows:
 ![](assets/dataflow_posebox.png)
 
 
+##### Tool used:
+
+[VGG Image Annotator](http://www.robots.ox.ac.uk/~vgg/software/via/) is used for point annotations
 
 ## Model
 
