@@ -15,12 +15,20 @@ pose estimation of a fixed hand-drawn marker.
 Checkout [requirements.txt](requirements.txt) for specifics
 
 ## Data
-
 The training data contains a specific marker hand drawn on paper and annotated always in a particular order.
 
 For example:
 
 ![](assets/sample_data.jpg)
+
+
+The data is created using a video file captured from a mobile device of the hand drawn marker on paper.
+
+The data flow pipeline is as follows:
+
+![](assets/dataflow_posebox.png)
+
+
 
 ## Model
 
