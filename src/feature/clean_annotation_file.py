@@ -3,16 +3,17 @@ import csv
 import config
 
 path = config.RESIZED_OUTPUT_FRAMES_PATH
+annotation_file = config.FORMATTED_ANNOTATION_FILE
 
 """
-Read CSV and delete any image from PATH that is not annotated
+Read CSV and delete rows without valid annotations
 """
 with open(config.ANNOTATION_FILE) as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     line_count = 0
 
     # Open temp file to write non-empty files and annotations
-    with open('new_annotation.csv', 'w') as new_csv_file:
+    with open(config.CLEAN_ANNOTATION_FILE, 'w') as new_csv_file:
         csv_writer = csv.writer(new_csv_file, delimiter=',')
 
         for row in csv_reader:
