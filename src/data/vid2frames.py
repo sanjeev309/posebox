@@ -21,13 +21,14 @@ class Vid2Frames:
     #     cv2.destroyAllWindows()
 
     def load_video(self, path):
+        """ Loads video at path into object"""
         self.video = None
 
         if os.path.exists(path):
             self.video = cv2.VideoCapture(path)
 
     def save_frames(self, video, out_path, visual):
-
+        """ Opens video as frames and saves them at config.OUTPUT_FRAMES_PATH"""
         base_filename = "image_"
         frame_count = 0
         while video.isOpened():
